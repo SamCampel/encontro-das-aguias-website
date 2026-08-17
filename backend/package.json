@@ -1,0 +1,32 @@
+{
+  "name": "aguias-backend",
+  "version": "1.0.0",
+  "description": "API REST para o site institucional Aguias",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "seed": "node seed.js",
+    "migrate": "sequelize-cli db:migrate",
+    "migration:generate": "sequelize-cli migration:generate"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.3",
+    "dotenv": "^16.0.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.0.0",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.3",
+    "moment-timezone": "^0.5.3",
+    "multer": "^2.2.0",
+    "mysql2": "^3.23.0",
+    "nodemon": "^3.1.1",
+    "qrcode": "^1.5.4",
+    "sequelize": "^6.37.8",
+    "slugify": "^1.6.9"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.5"
+  }
+}
