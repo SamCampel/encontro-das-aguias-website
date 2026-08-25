@@ -1,0 +1,1107 @@
+/* =========================================================
+   ÁGUIAS
+   Custom Visual Layer
+   Bootstrap 5 Override
+   LIGHT VERSION
+   ========================================================= */
+
+
+/* =========================================================
+   FONT
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+
+:root {
+
+    /* Paleta oficial da cliente */
+
+    --aguias-orange: #FFA61C;
+    --aguias-ochre: #B26904;
+    --aguias-red: #960000;
+    --aguias-wine: #610303;
+    --aguias-black: #000000;
+
+    /* Neutros */
+
+    --aguias-white: #FFFFFF;
+
+    --aguias-background: #FFFFFF;
+
+    --aguias-surface: #FFFFFF;
+    --aguias-surface-soft: #F7F7F7;
+    --aguias-surface-hover: #F2F2F2;
+
+    --aguias-text: #171717;
+    --aguias-text-soft: #4B4B4B;
+    --aguias-text-muted: #777777;
+
+    --aguias-border: rgba(97, 3, 3, 0.12);
+
+    --aguias-border-orange:
+        rgba(255, 166, 28, 0.30);
+
+
+    /* Bootstrap */
+
+    --bs-primary: #FFA61C;
+    --bs-primary-rgb: 255, 166, 28;
+
+    --bs-secondary: #B26904;
+    --bs-secondary-rgb: 178, 105, 4;
+
+    --bs-danger: #960000;
+    --bs-danger-rgb: 150, 0, 0;
+
+    --bs-dark: #000000;
+    --bs-dark-rgb: 0, 0, 0;
+
+    --bs-body-font-family:
+        'Montserrat',
+        sans-serif;
+
+    --bs-body-color: #171717;
+
+    --bs-body-bg: #FFFFFF;
+
+    --bs-border-radius: 0.75rem;
+
+    --bs-border-radius-sm: 0.5rem;
+
+    --bs-border-radius-lg: 1rem;
+}
+
+
+/* =========================================================
+   DOCUMENT
+   ========================================================= */
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family:
+        var(--bs-body-font-family);
+
+    color:
+        var(--aguias-text);
+
+    background:
+
+        radial-gradient(
+            circle at 95% 5%,
+            rgba(255, 166, 28, 0.08),
+            transparent 28rem
+        ),
+
+        radial-gradient(
+            circle at 0% 45%,
+            rgba(150, 0, 0, 0.035),
+            transparent 25rem
+        ),
+
+        var(--aguias-background);
+
+    background-attachment: fixed;
+
+}
+
+main {
+
+    color:
+        var(--aguias-text);
+
+}
+
+a {
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+::selection {
+
+    color:
+        var(--aguias-black);
+
+    background:
+        var(--aguias-orange);
+
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+    color:
+        var(--aguias-black);
+
+    font-weight: 700;
+
+    letter-spacing: -0.025em;
+
+}
+
+p {
+
+    color:
+        var(--aguias-text-soft);
+
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar {
+
+    padding-top: 0.95rem;
+
+    padding-bottom: 0.95rem;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #000000 0%,
+            #170000 48%,
+            #610303 100%
+        ) !important;
+
+    border-bottom:
+
+        1px solid
+        rgba(255, 166, 28, 0.22);
+
+    box-shadow:
+
+        0 8px 30px
+        rgba(0, 0, 0, 0.22);
+
+}
+
+.navbar > .container {
+
+    min-height: 54px;
+
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.navbar-brand {
+
+    color:
+        var(--aguias-orange) !important;
+
+    font-size: 1.45rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.055em;
+
+    text-transform: uppercase;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+.navbar-brand:hover {
+
+    color:
+        var(--aguias-white) !important;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =========================================================
+   NAVIGATION LINKS
+   ========================================================= */
+
+.navbar .nav-link {
+
+    position: relative;
+
+    padding-left:
+        0.8rem !important;
+
+    padding-right:
+        0.8rem !important;
+
+    color:
+        #E0E0E0 !important;
+
+    font-size: 0.94rem;
+
+    font-weight: 500;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+.navbar .nav-link:not(.btn):hover,
+.navbar .nav-link:not(.btn).active {
+
+    color:
+        var(--aguias-orange) !important;
+
+}
+
+.navbar .nav-link:not(.btn)::after {
+
+    content: '';
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: -0.15rem;
+
+    width: 0;
+
+    height: 2px;
+
+    border-radius: 999px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--aguias-red),
+            var(--aguias-orange)
+        );
+
+    transform:
+        translateX(-50%);
+
+    transition:
+        width 0.22s ease;
+
+}
+
+.navbar .nav-link:not(.btn):hover::after,
+.navbar .nav-link:not(.btn).active::after {
+
+    width: 55%;
+
+}
+
+
+/* =========================================================
+   NAVBAR LOGIN BUTTON
+   ========================================================= */
+
+.navbar .btn-outline-light {
+
+    padding:
+        0.48rem 0.95rem !important;
+
+    color:
+        var(--aguias-orange) !important;
+
+    background:
+        rgba(255, 166, 28, 0.04);
+
+    border:
+
+        1px solid
+        rgba(255, 166, 28, 0.55)
+        !important;
+
+    border-radius: 999px;
+
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+.navbar .btn-outline-light:hover {
+
+    color:
+        var(--aguias-black) !important;
+
+    background:
+        var(--aguias-orange);
+
+    border-color:
+        var(--aguias-orange) !important;
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+
+        0 7px 20px
+        rgba(255, 166, 28, 0.22);
+
+}
+
+
+/* =========================================================
+   MOBILE NAVBAR
+   ========================================================= */
+
+.navbar-toggler {
+
+    border-color:
+        rgba(255, 166, 28, 0.45);
+
+}
+
+.navbar-toggler:focus {
+
+    box-shadow:
+
+        0 0 0 0.2rem
+        rgba(255, 166, 28, 0.14);
+
+}
+
+
+/* =========================================================
+   DROPDOWN
+   ========================================================= */
+
+.dropdown-menu {
+
+    padding: 0.6rem;
+
+    color:
+        var(--aguias-text);
+
+    background:
+        var(--aguias-white);
+
+    border:
+
+        1px solid
+        rgba(97, 3, 3, 0.10);
+
+    border-radius: 0.9rem;
+
+    box-shadow:
+
+        0 18px 45px
+        rgba(0, 0, 0, 0.14);
+
+}
+
+.dropdown-header {
+
+    color:
+        var(--aguias-text-muted);
+
+}
+
+.dropdown-divider {
+
+    border-color:
+        rgba(0, 0, 0, 0.08);
+
+}
+
+.dropdown-item {
+
+    color:
+        var(--aguias-text);
+
+    border-radius: 0.55rem;
+
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+
+    color:
+        var(--aguias-red);
+
+    background:
+        rgba(255, 166, 28, 0.10);
+
+}
+
+
+/* =========================================================
+   HOME CONTAINER
+   ========================================================= */
+
+main > .container.py-5 {
+
+    padding-top:
+        4.5rem !important;
+
+    padding-bottom:
+        4.5rem !important;
+
+}
+
+
+/* =========================================================
+   HOME WELCOME
+   ========================================================= */
+
+.alert-info {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        2rem 2.2rem;
+
+    color:
+        var(--aguias-white);
+
+    background:
+
+        linear-gradient(
+            120deg,
+            #610303 0%,
+            #960000 55%,
+            #B26904 100%
+        );
+
+    border:
+
+        1px solid
+        rgba(255, 166, 28, 0.30);
+
+    border-radius: 1.25rem;
+
+    box-shadow:
+
+        0 16px 40px
+        rgba(97, 3, 3, 0.16);
+
+    font-size: 1.05rem;
+
+    font-weight: 500;
+
+}
+
+.alert-info::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: -100px;
+
+    right: -70px;
+
+    width: 250px;
+
+    height: 250px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 166, 28, 0.25);
+
+    filter:
+        blur(40px);
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================================
+   SECTION TITLES
+   ========================================================= */
+
+main section > h2 {
+
+    position: relative;
+
+    display: inline-block;
+
+    margin-bottom:
+        1.6rem !important;
+
+    color:
+        var(--aguias-black);
+
+    font-weight: 700;
+
+}
+
+main section > h2::after {
+
+    content: '';
+
+    display: block;
+
+    width: 54px;
+
+    height: 3px;
+
+    margin-top: 0.6rem;
+
+    border-radius: 999px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--aguias-red),
+            var(--aguias-orange)
+        );
+
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn {
+
+    border-radius: 0.72rem;
+
+    font-weight: 600;
+
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        background 0.16s ease,
+        color 0.16s ease,
+        border-color 0.16s ease;
+
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.btn-primary {
+
+    color:
+        var(--aguias-black);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--aguias-orange),
+            var(--aguias-ochre)
+        );
+
+    border: none;
+
+    box-shadow:
+
+        0 7px 20px
+        rgba(178, 105, 4, 0.18);
+
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+
+    color:
+        var(--aguias-black) !important;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #FFB43F,
+            var(--aguias-orange)
+        ) !important;
+
+    border-color:
+        transparent !important;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+
+        0 11px 28px
+        rgba(178, 105, 4, 0.24)
+        !important;
+
+}
+
+
+/* =========================================================
+   OUTLINE PRIMARY
+   ========================================================= */
+
+.btn-outline-primary {
+
+    color:
+        var(--aguias-red);
+
+    background:
+        transparent;
+
+    border-color:
+        var(--aguias-orange);
+
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+
+    color:
+        var(--aguias-black);
+
+    background:
+        var(--aguias-orange);
+
+    border-color:
+        var(--aguias-orange);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   DANGER BUTTON
+   ========================================================= */
+
+.btn-danger {
+
+    color:
+        var(--aguias-white);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--aguias-red),
+            var(--aguias-wine)
+        );
+
+    border: none;
+
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card {
+
+    color:
+        var(--aguias-text);
+
+    background:
+        var(--aguias-white);
+
+    border:
+
+        1px solid
+        rgba(97, 3, 3, 0.09);
+
+    border-radius: 1.05rem;
+
+    overflow: hidden;
+
+    box-shadow:
+
+        0 6px 22px
+        rgba(0, 0, 0, 0.07);
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+
+}
+
+.card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--aguias-border-orange);
+
+    box-shadow:
+
+        0 17px 40px
+        rgba(0, 0, 0, 0.11);
+
+}
+
+.card-img-top {
+
+    width: 100%;
+
+    border-bottom:
+
+        1px solid
+        rgba(0, 0, 0, 0.06);
+
+    transition:
+        transform 0.35s ease,
+        filter 0.35s ease;
+
+}
+
+.card:hover .card-img-top {
+
+    transform:
+        scale(1.025);
+
+}
+
+.card-body {
+
+    padding:
+        1.35rem;
+
+}
+
+.card-title {
+
+    color:
+        var(--aguias-black);
+
+    font-size: 1.1rem;
+
+    font-weight: 700;
+
+}
+
+.card .text-muted {
+
+    color:
+        var(--aguias-text-muted)
+        !important;
+
+    font-size: 0.88rem;
+
+}
+
+.card .fw-bold {
+
+    color:
+        var(--aguias-red);
+
+    font-size: 1.08rem;
+
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+.form-control,
+.form-select {
+
+    min-height: 46px;
+
+    color:
+        var(--aguias-text);
+
+    background:
+        var(--aguias-white);
+
+    border:
+
+        1px solid
+        rgba(0, 0, 0, 0.14);
+
+    border-radius: 0.7rem;
+
+    transition:
+        border-color 0.16s ease,
+        box-shadow 0.16s ease;
+
+}
+
+.form-control::placeholder {
+
+    color:
+        #8A8A8A;
+
+}
+
+.form-control:focus,
+.form-select:focus {
+
+    color:
+        var(--aguias-text);
+
+    background:
+        var(--aguias-white);
+
+    border-color:
+        var(--aguias-orange);
+
+    box-shadow:
+
+        0 0 0 0.2rem
+        rgba(255, 166, 28, 0.14);
+
+}
+
+.form-label {
+
+    color:
+        var(--aguias-text);
+
+    font-weight: 500;
+
+}
+
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+.table {
+
+    --bs-table-color:
+        #171717;
+
+    --bs-table-bg:
+        #FFFFFF;
+
+    --bs-table-border-color:
+        rgba(0, 0, 0, 0.10);
+
+    --bs-table-striped-bg:
+        #F7F7F7;
+
+    --bs-table-hover-bg:
+        rgba(255, 166, 28, 0.06);
+
+}
+
+
+/* =========================================================
+   MODALS
+   ========================================================= */
+
+.modal-content {
+
+    color:
+        var(--aguias-text);
+
+    background:
+        var(--aguias-white);
+
+    border:
+
+        1px solid
+        rgba(97, 3, 3, 0.10);
+
+    border-radius: 1rem;
+
+    box-shadow:
+
+        0 24px 70px
+        rgba(0, 0, 0, 0.16);
+
+}
+
+.modal-header,
+.modal-footer {
+
+    border-color:
+        rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer.bg-dark {
+
+    margin-top:
+        0 !important;
+
+    padding-top:
+        2.4rem !important;
+
+    padding-bottom:
+        2.4rem !important;
+
+    color:
+        #C8C8C8;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #180000 0%,
+            #000000 100%
+        ) !important;
+
+    border-top:
+
+        2px solid
+        rgba(255, 166, 28, 0.45);
+
+}
+
+footer p {
+
+    margin: 0;
+
+    color:
+        #C8C8C8;
+
+    font-size: 0.88rem;
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+
+    width: 9px;
+
+}
+
+::-webkit-scrollbar-track {
+
+    background:
+        #F2F2F2;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+    background:
+
+        linear-gradient(
+            var(--aguias-red),
+            var(--aguias-orange)
+        );
+
+    border-radius:
+        999px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .navbar-collapse {
+
+        margin-top: 0.8rem;
+
+        padding:
+            1rem 0 0.4rem;
+
+        border-top:
+
+            1px solid
+            rgba(255, 166, 28, 0.12);
+
+    }
+
+    .navbar .nav-link:not(.btn)::after {
+
+        display: none;
+
+    }
+
+    .navbar .btn-outline-light {
+
+        margin-top: 0.4rem;
+
+    }
+
+}
+
+
+@media (max-width: 575.98px) {
+
+    main > .container.py-5 {
+
+        padding-top:
+            2.8rem !important;
+
+        padding-bottom:
+            2.8rem !important;
+
+    }
+
+    .alert-info {
+
+        padding:
+            1.4rem;
+
+        border-radius:
+            1rem;
+
+        font-size:
+            0.95rem;
+
+    }
+
+    .navbar-brand {
+
+        font-size:
+            1.2rem;
+
+    }
+
+    .card-body {
+
+        padding:
+            1.1rem;
+
+    }
+
+}
