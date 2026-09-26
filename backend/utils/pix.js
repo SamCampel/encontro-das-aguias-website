@@ -1,6 +1,8 @@
 function field(id, value) {
   const text = String(value);
-  return `${id}${String(text.length).padStart(2, '0')}${text}`;
+  const length = Buffer.byteLength(text, 'utf8');
+  if (length > 99) throw new Error(`Campo Pix ${id} excede o limite de 99 bytes`);
+  return `${id}${String(length).padStart(2, '0')}${text}`;
 }
 
 function crc16(payload) {
@@ -12,15 +14,33 @@ function crc16(payload) {
   return crc.toString(16).toUpperCase().padStart(4, '0');
 }
 
+function normalizeMerchantText(value, fallback, maxLength) {
+  const normalized = String(value || fallback)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toUpperCase()
+    .replace(/[^A-Z0-9 ]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, maxLength);
+
+  return normalized || fallback;
+}
+
 function buildPixPayload({ key, name, city, amount, txid = '***' }) {
   const value = Number(amount);
-  if (!key || !Number.isFinite(value) || value <= 0) throw new Error('Dados Pix inválidos');
-  const merchantAccount = field('00', 'BR.GOV.BCB.PIX') + field('01', key);
+  const pixKey = String(key || '').trim();
+  if (!pixKey || !Number.isFinite(value) || value <= 0) throw new Error('Dados Pix inválidos');
+
+  const merchantName = normalizeMerchantText(name, 'AGUIAS', 25);
+  const merchantCity = normalizeMerchantText(city, 'SAO PAULO', 15);
+  const transactionId = String(txid || '***').replace(/[^A-Za-z0-9.*-]/g, '').slice(0, 25) || '***';
+  const merchantAccount = field('00', 'BR.GOV.BCB.PIX') + field('01', pixKey);
   const payload = [
     field('00', '01'), field('01', '12'), field('26', merchantAccount), field('52', '0000'),
     field('53', '986'), field('54', value.toFixed(2)), field('58', 'BR'),
-    field('59', String(name || 'AGUIAS').slice(0, 25)), field('60', String(city || 'SAO PAULO').slice(0, 15)),
-    field('62', field('05', String(txid).slice(0, 25))), '6304',
+    field('59', merchantName), field('60', merchantCity),
+    field('62', field('05', transactionId)), '6304',
   ].join('');
   return payload + crc16(payload);
 }

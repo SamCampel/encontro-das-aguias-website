@@ -13,6 +13,7 @@ import CartPage from './pages/public/Cart';
 import ProductDetailPage from './pages/public/ProductDetail';
 import CustomerLoginPage from './pages/public/CustomerLogin';
 import MyAccountPage from './pages/public/MyAccount';
+import MyOrdersPage from './pages/public/MyOrders';
 import LoginPage from './pages/admin/Login';
 import DashboardPage from './pages/admin/Dashboard';
 import ProductsPage from './pages/admin/Products';
@@ -48,7 +49,7 @@ function App() {
           <Route path="/produto/:id" element={<ProductDetailPage />} />
           <Route path="/entrar" element={<CustomerLoginPage />} />
           <Route path="/minha-conta" element={<CustomerProtectedRoute><MyAccountPage /></CustomerProtectedRoute>} />
-          <Route path="/meus-pedidos" element={<CustomerProtectedRoute><div className="container py-5"><h2>Meus Pedidos (em desenvolvimento)</h2></div></CustomerProtectedRoute>} />
+          <Route path="/meus-pedidos" element={<CustomerProtectedRoute><MyOrdersPage /></CustomerProtectedRoute>} />
           <Route path="/admin/login" element={<LoginPage />} />
           <Route path="/admin" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
           <Route path="/admin/products" element={<ProtectedRoute><ProductsPage /></ProtectedRoute>} />

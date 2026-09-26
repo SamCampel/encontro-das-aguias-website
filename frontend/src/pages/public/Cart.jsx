@@ -1,8 +1,8 @@
-import { Container, Table, Button, Form, Alert } from 'react-bootstrap';
+import { Container, Button, Alert } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useCustomerAuth } from '../../context/CustomerAuthContext';
-import api from '../../services/api';
+import api, { assetUrl } from '../../services/api';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 
@@ -60,30 +60,39 @@ export default function Cart() {
       )}
       {items.length === 0 ? <p>Carrinho vazio.</p> : (
         <>
-          <Table responsive>
-            <thead>
-              <tr><th>Produto</th><th>Preço</th><th>Quantidade</th><th>Total</th><th></th></tr>
-            </thead>
-            <tbody>
-              {items.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.name}</td>
-                  <td>R$ {Number(item.price).toFixed(2)}</td>
-                  <td>
-                    <Form.Control type="number" min="1" value={item.quantity} onChange={(e) => updateQuantity(item.id, Number(e.target.value))} style={{ width: 90 }} />
-                  </td>
-                  <td>R$ {(Number(item.price) * item.quantity).toFixed(2)}</td>
-                  <td><Button variant="danger" size="sm" onClick={() => removeFromCart(item.id)}>Remover</Button></td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-          <div className="d-flex justify-content-between align-items-center mt-4">
+          <div className="cart-list">
+            {items.map((item) => (
+              <article className="cart-item" key={item.id}>
+                <div className="cart-item-product">
+                  {item.image ? <img src={assetUrl(item.image)} alt={item.name} className="cart-item-image" /> : <div className="cart-item-image cart-item-image-placeholder" aria-hidden="true" />}
+                  <div className="cart-item-details">
+                    <h2>{item.name}</h2>
+                    {item.variant && <p>{item.variant}</p>}
+                    <span>Preço unitário: R$ {Number(item.price).toFixed(2)}</span>
+                  </div>
+                </div>
+                <div className="cart-item-quantity">
+                  <span>Quantidade</span>
+                  <div className="quantity-control" aria-label={`Quantidade de ${item.name}`}>
+                    <button type="button" onClick={() => updateQuantity(item.id, item.quantity - 1)} aria-label={`Diminuir quantidade de ${item.name}`}>-</button>
+                    <strong>{item.quantity}</strong>
+                    <button type="button" onClick={() => updateQuantity(item.id, item.quantity + 1)} aria-label={`Aumentar quantidade de ${item.name}`}>+</button>
+                  </div>
+                </div>
+                <div className="cart-item-total">
+                  <span>Subtotal</span>
+                  <strong>R$ {(Number(item.price) * item.quantity).toFixed(2)}</strong>
+                </div>
+                <Button variant="outline-danger" size="sm" className="cart-remove" onClick={() => removeFromCart(item.id)}>Remover</Button>
+              </article>
+            ))}
+          </div>
+          <div className="cart-summary d-flex justify-content-between align-items-center mt-4">
             <h4>Total: R$ {total.toFixed(2)}</h4>
             <div className="d-flex gap-2">
-              <Button variant="outline-secondary" onClick={clearCart}>Limpar</Button>
-              <Button variant="success" onClick={finishPix} disabled={!isAuthenticated}>Finalizar com Pix</Button>
-              <Button variant="primary" onClick={finishWhatsApp} disabled={!isAuthenticated}>Finalizar pelo WhatsApp</Button>
+              <Button variant="outline-danger" onClick={clearCart}>Limpar</Button>
+              <Button variant="outline-primary" onClick={finishPix} disabled={!isAuthenticated}>Finalizar com Pix</Button>
+              <Button variant="success" onClick={finishWhatsApp} disabled={!isAuthenticated}>Finalizar pelo WhatsApp</Button>
             </div>
           </div>
           {payment && <div className="mt-4 border rounded p-3"><img src={payment.qrCode} alt="QR Code Pix" width="180" /><p className="small text-break mt-2">{payment.payload}</p><Button size="sm" onClick={() => navigator.clipboard.writeText(payment.payload)}>Copiar código Pix</Button></div>}
